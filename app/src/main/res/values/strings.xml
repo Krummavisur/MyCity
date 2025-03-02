@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MyCity</string>
+    <string name="coffee_category">Coffee House</string>
+    <string name="landmarks_category">Landmarks</string>
+    <string name="clubs_category">Clubs</string>
+    <string name="blackberry">BlackBerry</string>
+    <string name="blackberry_details">Библиотека имеется, музыка приемлимая</string>
+    <string name="tvoya_chashka">Твоя Чашка</string>
+    <string name="chaska_details">Кофе и дессерты, возможность шавуху поесть</string>
+    <string name="coffee_people">Coffee People</string>
+    <string name="coffee_people_details">Хз, ни разу не был </string>
+    <string name="garage">Garage</string>
+    <string name="garage_description">На выходных бывает живая музыка</string>
+    <string name="lenin">Памятник Ленину</string>
+    <string name="lenin_details">Любуемся, пока не снесли</string>
+    <string name="chaes">Памятник ликвидаторам аварии на ЧАЭС</string>
+    <string name="chaes_details">мемориал участникам испытаний на Семипалатинском ядерном полигоне и ликвидаторам последствий аварии на Чернобыльской АЭС.</string>
+    <string name="botanGarden">Ботанический сад</string>
+    <string name="botanGarden_details">Достопримечательность «Северный Ботанический сад» по адресу Северо-Казахстанская область, Петропавловск, улица Юрия Медведева, 41.</string>
+    <string name="han">Резиденция Абылай-Хана</string>
+    <string name="han_details">Представляет из себя музей</string>
+    <string name="Forsage">Форсаж</string>
+    <string name="Forsage_det">пкаопптвшарпшвапртвапргвапгвапгаифывнрамивынамвыгн</string>
+    <string name="Plazma">Plazma</string>
+    <string name="Plazma_det">dfdfdsdfsdfsdsdsdfsdfsfsdfsdssf</string>
+    <string name="Crystal">Кристалл</string>
+    <string name="Crystal_det">ertgretergeryetruetjertjhrjtrtjertj</string>
+</resources>
