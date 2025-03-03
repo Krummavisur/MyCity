@@ -1,7 +1,6 @@
 package com.example.mycity
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,7 +27,7 @@ import com.example.mycity.ui.categories.CategoriesViewModel
 import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
-fun CategoriesScreenLayout(
+fun CategoriesScreen(
     viewModel: CategoriesViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -75,8 +74,8 @@ private fun CustomButton(
 
 @Preview
 @Composable
-fun CategoriesLayoutPreview() {
+fun CategoriesScreenPreview() {
     MyCityTheme {
-        CategoriesScreenLayout()
+        CategoriesScreen()
     }
 }

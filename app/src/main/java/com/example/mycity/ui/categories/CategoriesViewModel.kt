@@ -3,6 +3,7 @@ package com.example.mycity.ui.categories
 import androidx.lifecycle.ViewModel
 import com.example.mycity.data.DataSource
 import com.example.mycity.model.CategoryInfo
+import com.example.mycity.ui.places.PlacesViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -18,10 +19,11 @@ class CategoriesViewModel: ViewModel() {
     )
     val uiState: StateFlow<CategoryUiState> = _uiState
 
-    fun updateCurrentCategory(selectedCategory: CategoryInfo){
+    fun updateCurrentCategory(selectedCategory: CategoryInfo, placesViewModel: PlacesViewModel){
         _uiState.update {
             it.copy(currentCategory = selectedCategory)
         }
+        placesViewModel.updateListPlaces(selectedCategory)
     }
 
     fun navigateToListPage(){
@@ -29,7 +31,6 @@ class CategoriesViewModel: ViewModel() {
             it.copy(isShowingListPage = true)
         }
     }
-
 }
 
 data class CategoryUiState(
