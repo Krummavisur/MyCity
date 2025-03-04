@@ -1,5 +1,6 @@
 package com.example.mycity.ui.categories
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.mycity.data.DataSource
 import com.example.mycity.model.CategoryInfo

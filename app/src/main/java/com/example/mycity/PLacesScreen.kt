@@ -32,7 +32,9 @@ import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
 fun PlacesScreen(placesViewModel: PlacesViewModel = viewModel()){
+
     val uiState by placesViewModel.uiState.collectAsState()
+
     LazyColumn {
         items(uiState.placesList) {
             place ->
