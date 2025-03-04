@@ -28,9 +28,9 @@ import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
 fun CategoriesScreen(
-    viewModel: CategoriesViewModel = viewModel()
+    categoriesViewModel: CategoriesViewModel = viewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by categoriesViewModel.uiState.collectAsState()
 
     LazyColumn (
         modifier = Modifier.fillMaxSize(),
@@ -41,7 +41,7 @@ fun CategoriesScreen(
             uiState.categoryList.forEachIndexed { index, category ->
                 CustomButton(
                     onClick = {
-                        viewModel.navigateToListPage(selectedCategory = index)
+                        categoriesViewModel.navigateToListPage(selectedCategory = index)
                     },
                     buttonTitle = stringResource(id = category.title),
                     modifier = Modifier.padding(vertical = 20.dp)
