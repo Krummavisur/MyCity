@@ -38,9 +38,11 @@ fun CategoriesScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            uiState.categoryList.forEach { category ->
+            uiState.categoryList.forEachIndexed { index, category ->
                 CustomButton(
-                    onClick = {},
+                    onClick = {
+                        viewModel.navigateToListPage(selectedCategory = index)
+                    },
                     buttonTitle = stringResource(id = category.title),
                     modifier = Modifier.padding(vertical = 20.dp)
                 )

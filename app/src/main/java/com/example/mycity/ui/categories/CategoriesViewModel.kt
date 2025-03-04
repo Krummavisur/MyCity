@@ -27,10 +27,10 @@ class CategoriesViewModel: ViewModel() {
         placesViewModel.updateListPlaces(selectedCategory)
     }
 
-    fun navigateToListPage(){
-        _uiState.update {
-            it.copy(isShowingListPage = true)
-        }
+    fun navigateToListPage(selectedCategory: Int){
+//        _uiState.update {
+//            it.copy(isShowingListPage = true)
+//        }
     }
 }
 
