@@ -5,10 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.example.mycity.ui.categories.CategoriesViewModel
 import com.example.mycity.ui.places.PlacesViewModel
 import androidx.compose.foundation.layout.padding
@@ -22,6 +18,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 
 enum class MyCityScreen(@StringRes val title: Int) {
     Categories(title = R.string.app_name),
@@ -75,6 +75,8 @@ fun MyCityApp() {
             )
         }
     ) { innerPadding ->
+        val uiState by categoriesViewModel.uiState.collectAsState()
+
 
         NavHost(
             navController = navController,
@@ -83,8 +85,8 @@ fun MyCityApp() {
         ) {
             composable(route = MyCityScreen.Categories.name) {
                 CategoriesScreen(
-                    navController = navController, categoriesViewModel = categoriesViewModel,
-                    placesViewModel = placesViewModel)
+                    categoriesViewModel = categoriesViewModel,
+                    onCategoryClick = {navController.navigate(MyCityScreen.Places.name)})
             }
 
             composable(route = MyCityScreen.Places.name) {
