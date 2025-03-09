@@ -18,6 +18,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -53,13 +54,13 @@ fun MyCityAppBar(
 }
 
 @Composable
-fun MyCityApp() {
+fun MyCityApp(
+    navController: NavHostController = rememberNavController(),
 
-    val navController = rememberNavController()
+     categoriesViewModel: CategoriesViewModel = viewModel(),
 
-    val categoriesViewModel: CategoriesViewModel = viewModel()
-
-    val placesViewModel: PlacesViewModel = viewModel()
+     placesViewModel: PlacesViewModel = viewModel()
+) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
 
