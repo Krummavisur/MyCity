@@ -1,5 +1,6 @@
 package com.example.mycity.ui.places
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.mycity.model.CategoryInfo
 import com.example.mycity.model.PlaceInfo
@@ -17,6 +18,7 @@ class PlacesViewModel: ViewModel() {
     val uiState: StateFlow<PlaceUiState> = _uiState
 
     fun updateListPlaces(category: CategoryInfo){
+        Log.wtf("DEBUG", "Updating places list: ${category.places.size}")
         _uiState.update{
             it.copy(
                 placesList = category.places,

@@ -23,16 +23,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.mycity.ui.categories.CategoriesViewModel
-import com.example.mycity.ui.places.PlacesViewModel
 import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
-fun CategoriesScreen( navController: NavController,
+fun CategoriesScreen(
     categoriesViewModel: CategoriesViewModel = viewModel(),
-    placesViewModel: PlacesViewModel = viewModel()
+    onCategoryClick: () -> Unit
 ) {
     val uiState by categoriesViewModel.uiState.collectAsState()
 
@@ -42,15 +39,9 @@ fun CategoriesScreen( navController: NavController,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            uiState.categoryList.forEachIndexed { index, category ->
+            uiState.categoryList.forEachIndexed {index, category ->
                 CustomButton(
-                    onClick = {
-                        categoriesViewModel.updateCurrentCategory(category,placesViewModel)
-
-                        categoriesViewModel.navigateToListPage()
-
-                        navController.navigate(MyCityScreen.Places.name)
-                    },
+                    onClick = {onCategoryClick()},
                     buttonTitle = stringResource(id = category.title),
                     modifier = Modifier.padding(vertical = 20.dp)
                 )
@@ -86,6 +77,8 @@ private fun CustomButton(
 @Composable
 fun CategoriesScreenPreview() {
     MyCityTheme {
-        CategoriesScreen()
+        CategoriesScreen(
+            onCategoryClick = {}
+        )
     }
 }
