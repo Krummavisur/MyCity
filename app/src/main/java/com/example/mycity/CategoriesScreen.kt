@@ -29,7 +29,7 @@ import com.example.mycity.ui.theme.MyCityTheme
 @Composable
 fun CategoriesScreen(
     categoriesViewModel: CategoriesViewModel = viewModel(),
-    onCategoryClick: () -> Unit
+    onCategoryClick: (Int) -> Unit
 ) {
     val uiState by categoriesViewModel.uiState.collectAsState()
 
@@ -41,7 +41,7 @@ fun CategoriesScreen(
         item {
             uiState.categoryList.forEachIndexed {index, category ->
                 CustomButton(
-                    onClick = {onCategoryClick()},
+                    onClick = {onCategoryClick(index)},
                     buttonTitle = stringResource(id = category.title),
                     modifier = Modifier.padding(vertical = 20.dp)
                 )

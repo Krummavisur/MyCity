@@ -19,10 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 enum class MyCityScreen(@StringRes val title: Int) {
     Categories(title = R.string.app_name),
@@ -87,12 +89,20 @@ fun MyCityApp(
             composable(route = MyCityScreen.Categories.name) {
                 CategoriesScreen(
                     categoriesViewModel = categoriesViewModel,
-                    onCategoryClick = {navController.navigate(MyCityScreen.Places.name)})
+                    onCategoryClick = {
+                        navController.navigate(MyCityScreen.Places.name + "/{index}")
+                    })
             }
 
-            composable(route = MyCityScreen.Places.name) {
+            composable(route = MyCityScreen.Places.name + "/{index}",
+                arguments = listOf(navArgument("index") {type = NavType.IntType}))
+             {
+           stackEntry ->
+               val index =  stackEntry.arguments?.getInt("index") ?: 0
+
                 PlacesScreen(
-                    placesViewModel = placesViewModel
+                    index,
+                    placesViewModel = placesViewModel,
                 )
             }
         }

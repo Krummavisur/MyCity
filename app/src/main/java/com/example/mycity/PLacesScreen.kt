@@ -32,7 +32,10 @@ import com.example.mycity.ui.places.PlacesViewModel
 import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
-fun PlacesScreen(placesViewModel: PlacesViewModel = viewModel()){
+fun PlacesScreen(
+    index: Int?,
+    placesViewModel: PlacesViewModel = viewModel()
+)   {
 
     val uiState by placesViewModel.uiState.collectAsStateWithLifecycle()
     LazyColumn (modifier = Modifier.fillMaxSize()) {
@@ -73,6 +76,8 @@ fun CardItemView(place: PlaceInfo) {
 @Composable
 fun PlacesScreenPreview() {
     MyCityTheme {
-        PlacesScreen()
+        PlacesScreen(
+            index = 0
+        )
     }
 }
