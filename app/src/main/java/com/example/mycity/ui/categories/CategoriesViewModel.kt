@@ -20,12 +20,12 @@ class CategoriesViewModel: ViewModel() {
     )
     val uiState: StateFlow<CategoryUiState> = _uiState
 
-    fun updateCurrentCategory(selectedCategory: CategoryInfo, placesViewModel: PlacesViewModel){
-        _uiState.update {
-            it.copy(currentCategory = selectedCategory)
-        }
-        placesViewModel.updateListPlaces(selectedCategory)
-    }
+    //fun updateCurrentCategory(selectedCategory: CategoryInfo, placesViewModel: PlacesViewModel){
+     //   _uiState.update {
+    //        it.copy(currentCategory = selectedCategory)
+    //    }
+   //     placesViewModel.updateListPlaces(selectedCategory)
+  //  }
 
     fun navigateToListPage(){
       _uiState.update {

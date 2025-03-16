@@ -27,17 +27,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import com.example.mycity.model.PlaceInfo
 import com.example.mycity.ui.places.PlacesViewModel
 import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
 fun PlacesScreen(
+    navBackStackEntry: NavBackStackEntry,
     index: Int?,
     placesViewModel: PlacesViewModel = viewModel()
 )   {
+    val index =  navBackStackEntry.arguments?.getInt("index") ?: 0
+
+    placesViewModel.updateListPlaces(index)
 
     val uiState by placesViewModel.uiState.collectAsStateWithLifecycle()
+
     LazyColumn (modifier = Modifier.fillMaxSize()) {
         items(uiState.placesList) {
             place ->
@@ -72,12 +78,3 @@ fun CardItemView(place: PlaceInfo) {
     }
 }
 
-@Preview
-@Composable
-fun PlacesScreenPreview() {
-    MyCityTheme {
-        PlacesScreen(
-            index = 0
-        )
-    }
-}

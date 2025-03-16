@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -97,10 +98,8 @@ fun MyCityApp(
                     categoriesViewModel = categoriesViewModel,
                     onCategoryClick = {
                         index ->
-                        Log.d("DEBUG", "test1")
 
-                        navController.navigate(MyCityScreen.Places.route.replace("{index}",index.toString()))
-                        Log.d("DEBUG", "testX")
+                        navController.navigate(MyCityScreen.Places.name + "/$index")
                     }
                 )
             }
@@ -115,8 +114,9 @@ fun MyCityApp(
                val index =  backStackEntry.arguments?.getInt("index") ?: 0
                 Log.d("DEBUG", "test3")
                 PlacesScreen(
-                    index,
+                    index = index,
                     placesViewModel = placesViewModel,
+                    navBackStackEntry = backStackEntry
                 )
             }
         }

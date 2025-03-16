@@ -1,35 +1,32 @@
 package com.example.mycity.ui.places
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.mycity.data.DataSource
 import com.example.mycity.model.CategoryInfo
 import com.example.mycity.model.PlaceInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class PlacesViewModel: ViewModel() {
-    private val _uiState = MutableStateFlow(
-        PlaceUiState(
-            placesList = emptyList(),
-            currentCategory = null
-        )
-    )
+
+class PlacesViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
+    private val _uiState: MutableStateFlow<PlaceUiState> = MutableStateFlow(PlaceUiState())
     val uiState: StateFlow<PlaceUiState> = _uiState
 
-    fun updateListPlaces(category: CategoryInfo){
-        Log.wtf("DEBUG", "Updating places list: ${category.places.size}")
-        _uiState.update{
-            it.copy(
-                placesList = category.places,
-                currentCategory = category
-                )
-            }
+    val index: Int = savedStateHandle["index"] ?:0
+
+    fun updateListPlaces(categoryIndex: Int){
+        val category = DataSource.getPlaces(categoryIndex)
+        _uiState.value = PlaceUiState(
+               placesList = category.places,
+            )
         }
     }
 
     data class PlaceUiState(
-        val placesList: List<PlaceInfo>,
-        val currentCategory: CategoryInfo?,
+        val placesList: List<PlaceInfo> = emptyList(),
+        val currentCategory: CategoryInfo? = null,
         val isShowingListPage: Boolean = true
     )
