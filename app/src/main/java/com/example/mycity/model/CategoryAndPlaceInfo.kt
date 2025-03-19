@@ -5,7 +5,8 @@ import androidx.annotation.StringRes
 
 data class CategoryInfo (
     @StringRes val title: Int,
-    val places: List<PlaceInfo>
+    @DrawableRes val categoryImage: Int,
+    val places: List<PlaceInfo>,
 )
 
 data class PlaceInfo(

@@ -2,12 +2,6 @@ package com.example.mycity
 
 import android.util.Log
 import androidx.annotation.StringRes
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mycity.ui.categories.CategoriesViewModel
-import com.example.mycity.ui.places.PlacesViewModel
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -17,9 +11,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavBackStackEntry
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -27,6 +23,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.mycity.MyCityScreen.values
+import com.example.mycity.ui.categories.CategoriesViewModel
+import com.example.mycity.ui.places.PlacesViewModel
 
 enum class MyCityScreen(val route: String, @StringRes val title: Int) {
     Categories("categories", title = R.string.app_name),
@@ -83,8 +82,6 @@ fun MyCityApp(
             )
         }
     ) { innerPadding ->
-        val uiState by categoriesViewModel.uiState.collectAsState()
-
 
         NavHost(
             navController = navController,
@@ -92,6 +89,7 @@ fun MyCityApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(route = MyCityScreen.Categories.route) {
+
                     backStackEntry ->
 
                 CategoriesScreen(
@@ -106,13 +104,13 @@ fun MyCityApp(
 
             composable(
                 route = MyCityScreen.Places.route,
-                arguments = listOf(navArgument("index") {type = NavType.IntType}))
+                arguments = listOf(navArgument("index") {type = NavType.IntType})
+            )
              {
                      backStackEntry ->
 
-                Log.d("DEBUG", "test2")
                val index =  backStackEntry.arguments?.getInt("index") ?: 0
-                Log.d("DEBUG", "test3")
+
                 PlacesScreen(
                     index = index,
                     placesViewModel = placesViewModel,

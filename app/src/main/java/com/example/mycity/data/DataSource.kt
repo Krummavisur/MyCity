@@ -15,6 +15,7 @@ object DataSource {
         return listOf(
             CategoryInfo(
                 title = R.string.coffee_category,
+                categoryImage = R.drawable.cofffe_cup,
                 places = listOf(
                     PlaceInfo(
                         name = R.string.blackberry,
@@ -40,6 +41,7 @@ object DataSource {
             ),
             CategoryInfo(
                 title = R.string.landmarks_category,
+                categoryImage = R.drawable.mus,
                 places = listOf(
                     PlaceInfo(
                         name = R.string.botanGarden,
@@ -65,6 +67,7 @@ object DataSource {
             ),
             CategoryInfo(
                 title = R.string.clubs_category,
+                categoryImage = R.drawable.karaoke2,
                 places = listOf(
                     PlaceInfo(
                         name = R.string.Crystal,
