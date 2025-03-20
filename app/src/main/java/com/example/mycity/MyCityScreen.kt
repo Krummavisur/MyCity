@@ -1,7 +1,9 @@
 package com.example.mycity
 
-import android.util.Log
 import androidx.annotation.StringRes
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -23,7 +25,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mycity.MyCityScreen.values
 import com.example.mycity.ui.categories.CategoriesViewModel
 import com.example.mycity.ui.places.PlacesViewModel
 
@@ -86,9 +87,16 @@ fun MyCityApp(
         NavHost(
             navController = navController,
             startDestination = MyCityScreen.Categories.route,
-            modifier = Modifier.padding(innerPadding)
+            modifier = Modifier.padding(innerPadding),
+            enterTransition = { fadeIn(animationSpec = tween(0)) } ,
+            exitTransition = { fadeOut(animationSpec = tween(0)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(0)) },
+            popExitTransition = { fadeOut(animationSpec = (tween(0))) },
+
         ) {
-            composable(route = MyCityScreen.Categories.route) {
+            composable(route = MyCityScreen.Categories.route,
+
+            ) {
 
                     backStackEntry ->
 
