@@ -1,8 +1,6 @@
 package com.example.mycity.ui.details
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.mycity.data.DataSource
 import com.example.mycity.model.PlaceInfo
 import com.example.mycity.ui.places.PlacesViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

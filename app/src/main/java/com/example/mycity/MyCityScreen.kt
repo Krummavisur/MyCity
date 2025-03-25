@@ -25,12 +25,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.mycity.ui.DetailsScreen
 import com.example.mycity.ui.categories.CategoriesViewModel
+import com.example.mycity.ui.details.DetailsViewModel
 import com.example.mycity.ui.places.PlacesViewModel
 
 enum class MyCityScreen(val route: String, @StringRes val title: Int) {
     Categories("categories", title = R.string.app_name),
-    Places("places/{index}", title = R.string.places);
+    Places("places/{index}", title = R.string.places),
+    Details("details/{index}", title = R.string.details);
 
     companion object {
         fun fromRoute(route: String?): MyCityScreen =
@@ -67,7 +70,8 @@ fun MyCityAppBar(
 fun MyCityApp(
     navController: NavHostController = rememberNavController(),
     categoriesViewModel: CategoriesViewModel = viewModel(),
-    placesViewModel: PlacesViewModel = viewModel()
+    placesViewModel: PlacesViewModel = viewModel(),
+    detailsViewModel: DetailsViewModel = viewModel()
 ) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -97,7 +101,6 @@ fun MyCityApp(
             composable(route = MyCityScreen.Categories.route,
 
             ) {
-
                     backStackEntry ->
 
                 CategoriesScreen(
@@ -115,7 +118,7 @@ fun MyCityApp(
                 arguments = listOf(navArgument("index") {type = NavType.IntType})
             )
              {
-                     backStackEntry ->
+                backStackEntry ->
 
                val index =  backStackEntry.arguments?.getInt("index") ?: 0
 
@@ -124,6 +127,18 @@ fun MyCityApp(
                     placesViewModel = placesViewModel,
                     navBackStackEntry = backStackEntry
                 )
+            }
+
+            composable(
+                route = MyCityScreen.Details.route,
+                arguments = listOf(navArgument("index") {type = NavType.IntType})
+            ) {
+                backStackEntry ->
+
+                DetailsScreen(
+                    detailsViewModel = DetailsViewModel
+                )
+
             }
         }
     }

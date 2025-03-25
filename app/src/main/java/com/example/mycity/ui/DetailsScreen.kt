@@ -31,9 +31,9 @@ import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
 fun DetailsScreen(
-    viewModel: DetailsViewModel
+    detailsViewModel: DetailsViewModel
 ) {
-    val place = viewModel.uiState.collectAsState().value
+    val place = detailsViewModel.uiState.collectAsState().value
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn {

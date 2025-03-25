@@ -1,6 +1,5 @@
 package com.example.mycity.ui.places
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.mycity.data.DataSource
@@ -8,7 +7,6 @@ import com.example.mycity.model.CategoryInfo
 import com.example.mycity.model.PlaceInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 
 
 class PlacesViewModel(savedStateHandle: SavedStateHandle): ViewModel() {
