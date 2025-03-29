@@ -38,8 +38,8 @@ import com.example.mycity.ui.places.PlacesViewModel
 @Composable
 fun PlacesScreen(
     navBackStackEntry: NavBackStackEntry,
-    index: Int?,
-    placesViewModel: PlacesViewModel = viewModel()
+    placesViewModel: PlacesViewModel = viewModel(),
+    onPlaceClick: (Int) -> Unit
 )   {
     val index =  navBackStackEntry.arguments?.getInt("index") ?: 0
 
@@ -50,13 +50,18 @@ fun PlacesScreen(
     LazyColumn (modifier = Modifier.fillMaxSize()) {
         items(uiState.placesList) {
             place ->
-            CardItemView(place)
+            CardItemView(
+                place,
+                onClick = {onPlaceClick(index)})
         }
     }
 }
 
 @Composable
-fun CardItemView(place: PlaceInfo) {
+fun CardItemView(
+    place: PlaceInfo,
+    onClick: (Int) -> Unit
+) {
     Card (modifier = Modifier
         .fillMaxWidth()
         .padding(16.dp)
@@ -64,8 +69,10 @@ fun CardItemView(place: PlaceInfo) {
         .border(1.dp, Color.Gray),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.surface,
         )
+
+
     ){
         Row (modifier = Modifier.fillMaxSize()
         ){

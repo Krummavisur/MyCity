@@ -123,9 +123,13 @@ fun MyCityApp(
                val index =  backStackEntry.arguments?.getInt("index") ?: 0
 
                 PlacesScreen(
-                    index = index,
                     placesViewModel = placesViewModel,
-                    navBackStackEntry = backStackEntry
+                    navBackStackEntry = backStackEntry,
+                    onPlaceClick = {
+                        placeIndex ->
+                        navController.navigate(MyCityScreen.Details.route.replace ("/$index", "$placeIndex"))
+                    }
+
                 )
             }
 
@@ -134,9 +138,10 @@ fun MyCityApp(
                 arguments = listOf(navArgument("index") {type = NavType.IntType})
             ) {
                 backStackEntry ->
-
+                val index = backStackEntry.arguments?.getInt("index") ?: 0
                 DetailsScreen(
-                    detailsViewModel = DetailsViewModel
+                    index = index,
+                    detailsViewModel = detailsViewModel
                 )
 
             }

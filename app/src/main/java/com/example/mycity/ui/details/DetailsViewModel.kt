@@ -20,8 +20,7 @@ class DetailsViewModel(
     }
 
     private fun loadPLaceDetails() {
-        val place =
-            placesViewModel.uiState.value.placesList.getOrNull(placeIndex)
+        val place = placesViewModel.uiState.value.placesList.getOrNull(placeIndex)
 
             _uiState.update { place }
     }

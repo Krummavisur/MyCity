@@ -31,6 +31,7 @@ import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
 fun DetailsScreen(
+    index: Int,
     detailsViewModel: DetailsViewModel
 ) {
     val place = detailsViewModel.uiState.collectAsState().value
