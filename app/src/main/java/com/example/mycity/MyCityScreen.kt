@@ -28,6 +28,7 @@ import androidx.navigation.navArgument
 import com.example.mycity.ui.DetailsScreen
 import com.example.mycity.ui.categories.CategoriesViewModel
 import com.example.mycity.ui.details.DetailsViewModel
+import com.example.mycity.ui.details.DetailsViewModelFactory
 import com.example.mycity.ui.places.PlacesViewModel
 
 enum class MyCityScreen(val route: String, @StringRes val title: Int) {
@@ -71,7 +72,6 @@ fun MyCityApp(
     navController: NavHostController = rememberNavController(),
     categoriesViewModel: CategoriesViewModel = viewModel(),
     placesViewModel: PlacesViewModel = viewModel(),
-    detailsViewModel: DetailsViewModel = viewModel()
 ) {
 
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -107,8 +107,7 @@ fun MyCityApp(
                     categoriesViewModel = categoriesViewModel,
                     onCategoryClick = {
                         index ->
-
-                        navController.navigate(MyCityScreen.Places.name + "/$index")
+                        navController.navigate("places/$index")
                     }
                 )
             }
@@ -127,7 +126,7 @@ fun MyCityApp(
                     navBackStackEntry = backStackEntry,
                     onPlaceClick = {
                         placeIndex ->
-                        navController.navigate(MyCityScreen.Details.route.replace ("/$index", "$placeIndex"))
+                        navController.navigate("details/$placeIndex")
                     }
 
                 )
@@ -139,8 +138,11 @@ fun MyCityApp(
             ) {
                 backStackEntry ->
                 val index = backStackEntry.arguments?.getInt("index") ?: 0
+                val placesViewModel: PlacesViewModel = hiltViewModel()
+                val detailsViewModel: DetailsViewModel = viewModel(
+                    factory = DetailsViewModelFactory(placesViewModel, index)
+                )
                 DetailsScreen(
-                    index = index,
                     detailsViewModel = detailsViewModel
                 )
 
