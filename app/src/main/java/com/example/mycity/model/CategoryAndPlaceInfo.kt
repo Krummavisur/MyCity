@@ -10,6 +10,7 @@ data class CategoryInfo (
 )
 
 data class PlaceInfo(
+    val id: Int,
     @StringRes val name: Int,
     @StringRes val details: Int,
     @DrawableRes val image: Int

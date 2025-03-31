@@ -27,68 +27,60 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mycity.model.PlaceInfo
 import com.example.mycity.ui.details.DetailsViewModel
+import com.example.mycity.ui.places.PlacesViewModel
 import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
-fun DetailsScreen(
-    detailsViewModel: DetailsViewModel
-) {
+fun DetailsScreen(detailsViewModel: DetailsViewModel, index: Int) {
     val place = detailsViewModel.uiState.collectAsState().value
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn {
-            item {
-                place?.let {
-                    InformationList(place = it)
+    place?.let {
+        Box(modifier = Modifier.fillMaxSize()) {
+            LazyColumn {
+                item {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(Color(0xFFE44D26), Color.Black)
+                                )
+                            )
+                    ) {
+                        Image(
+                            painter = painterResource(id = it.image),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(80.dp)
+                                .align(Alignment.CenterEnd)
+                                .padding(end = 16.dp)
+                        )
+
+                        Column(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .padding(16.dp)
+                        ) {
+                            Text(
+                                text = stringResource(id = it.name),
+                                fontSize = 28.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Text(
+                                text = stringResource(id = it.details),
+                                fontSize = 16.sp,
+                                color = Color.White,
+                                modifier = Modifier.padding(16.dp)
+                            )
+                        }
+                    }
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun InformationList(
-    place: PlaceInfo
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(Color(0xFFE44D26), Color.Black)
-                )
-            )
-    ) {
-        Image(
-            painter = painterResource(id = place.image),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(80.dp)
-                .align(Alignment.CenterEnd)
-                .padding(end = 16.dp)
-        )
-
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(16.dp)
-        ) {
-            Text(
-                text = stringResource(id = place.name),
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text = stringResource(id = place.details),
-                fontSize = 16.sp,
-                color = Color.White,
-                modifier = Modifier.padding(16.dp)
-            )
         }
     }
 }
@@ -97,12 +89,6 @@ private fun InformationList(
 @Composable
 fun DetailsPreview() {
     MyCityTheme {
-        InformationList(
-            place = PlaceInfo(
-                name = 0,
-                details = 0,
-                image =  0
-            )
-        )
+
     }
 }

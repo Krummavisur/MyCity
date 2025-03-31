@@ -31,6 +31,7 @@ import com.example.mycity.ui.details.DetailsViewModel
 import com.example.mycity.ui.details.DetailsViewModelFactory
 import com.example.mycity.ui.places.PlacesViewModel
 
+
 enum class MyCityScreen(val route: String, @StringRes val title: Int) {
     Categories("categories", title = R.string.app_name),
     Places("places/{index}", title = R.string.places),
@@ -126,7 +127,7 @@ fun MyCityApp(
                     navBackStackEntry = backStackEntry,
                     onPlaceClick = {
                         placeIndex ->
-                        navController.navigate("details/$placeIndex")
+                        navController.navigate(MyCityScreen.Details.route.replace("{index}", "$index"))
                     }
 
                 )
@@ -138,11 +139,12 @@ fun MyCityApp(
             ) {
                 backStackEntry ->
                 val index = backStackEntry.arguments?.getInt("index") ?: 0
-                val placesViewModel: PlacesViewModel = hiltViewModel()
+                val placesViewModel: PlacesViewModel = viewModel()
                 val detailsViewModel: DetailsViewModel = viewModel(
                     factory = DetailsViewModelFactory(placesViewModel, index)
                 )
                 DetailsScreen(
+                    index = index,
                     detailsViewModel = detailsViewModel
                 )
 
