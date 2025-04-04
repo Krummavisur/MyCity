@@ -120,14 +120,12 @@ fun MyCityApp(
              {
                 backStackEntry ->
 
-               val index =  backStackEntry.arguments?.getInt("index") ?: 0
-
                 PlacesScreen(
                     placesViewModel = placesViewModel,
                     navBackStackEntry = backStackEntry,
                     onPlaceClick = {
                         placeIndex ->
-                        navController.navigate(MyCityScreen.Details.route.replace("{index}", "$index"))
+                        navController.navigate(MyCityScreen.Details.route.replace("{index}", "$placeIndex"))
                     }
 
                 )
@@ -139,7 +137,6 @@ fun MyCityApp(
             ) {
                 backStackEntry ->
                 val index = backStackEntry.arguments?.getInt("index") ?: 0
-                val placesViewModel: PlacesViewModel = viewModel()
                 val detailsViewModel: DetailsViewModel = viewModel(
                     factory = DetailsViewModelFactory(placesViewModel, index)
                 )
