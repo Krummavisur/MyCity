@@ -5,7 +5,6 @@ import com.example.mycity.data.DataSource
 import com.example.mycity.model.CategoryInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 
 class CategoriesViewModel: ViewModel() {
     private val _uiState = MutableStateFlow(
@@ -17,19 +16,6 @@ class CategoriesViewModel: ViewModel() {
         )
     )
     val uiState: StateFlow<CategoryUiState> = _uiState
-
-    //fun updateCurrentCategory(selectedCategory: CategoryInfo, placesViewModel: PlacesViewModel){
-     //   _uiState.update {
-    //        it.copy(currentCategory = selectedCategory)
-    //    }
-   //     placesViewModel.updateListPlaces(selectedCategory)
-  //  }
-
-    fun navigateToListPage(){
-      _uiState.update {
-            it.copy(isShowingListPage = true)
-        }
-    }
 }
 
 data class CategoryUiState(

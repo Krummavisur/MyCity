@@ -39,7 +39,8 @@ fun CategoriesScreen(
     val uiState by categoriesViewModel.uiState.collectAsState()
 
     LazyColumn (
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -49,13 +50,13 @@ fun CategoriesScreen(
                     onClick = {onCategoryClick(index)},
                     buttonTitle = stringResource(id = category.title),
                     categoryImage = category.categoryImage,
-                    modifier = Modifier.padding(vertical = 20.dp)
+                    modifier = Modifier
+                        .padding(vertical = 20.dp)
                 )
             }
         }
     }
 }
-
 @Composable
 private fun CustomButton(
     onClick: () -> Unit,

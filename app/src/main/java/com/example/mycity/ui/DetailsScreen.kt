@@ -3,13 +3,10 @@ package com.example.mycity.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -28,9 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mycity.model.PlaceInfo
 import com.example.mycity.ui.details.DetailsViewModel
-import com.example.mycity.ui.places.PlacesViewModel
 import com.example.mycity.ui.theme.MyCityTheme
 
 @Composable
@@ -39,7 +34,8 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, index: Int) {
 
     place?.let {
         LazyColumn(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) {
             item {
                 Box(
@@ -53,7 +49,6 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, index: Int) {
                         contentScale = ContentScale.Crop,
                         modifier = Modifier.fillMaxSize()
                     )
-
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
@@ -64,7 +59,6 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, index: Int) {
                                 )
                             )
                     )
-
                     Text(
                         text = stringResource(id = it.name),
                         color = Color.White,
@@ -76,7 +70,6 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, index: Int) {
                     )
                 }
             }
-
             item {
                 Card(
                     shape = RoundedCornerShape(16.dp),
@@ -95,7 +88,6 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, index: Int) {
         }
     }
 }
-
 @Preview
 @Composable
 fun DetailsPreview() {

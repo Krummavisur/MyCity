@@ -43,7 +43,6 @@ enum class MyCityScreen(val route: String, @StringRes val title: Int) {
                 ?: Categories
     }
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyCityAppBar(
@@ -74,9 +73,7 @@ fun MyCityApp(
     categoriesViewModel: CategoriesViewModel = viewModel(),
     placesViewModel: PlacesViewModel = viewModel(),
 ) {
-
     val backStackEntry by navController.currentBackStackEntryAsState()
-
     val currentScreen = MyCityScreen.fromRoute(backStackEntry?.destination?.route)
 
     Scaffold(
@@ -99,25 +96,20 @@ fun MyCityApp(
             popExitTransition = { fadeOut(animationSpec = (tween(0))) },
 
         ) {
-            composable(route = MyCityScreen.Categories.route,
-
-            ) {
-                    backStackEntry ->
+            composable(route = MyCityScreen.Categories.route) {
+               backStackEntry ->
 
                 CategoriesScreen(
                     categoriesViewModel = categoriesViewModel,
-                    onCategoryClick = {
-                        index ->
+                    onCategoryClick = { index ->
                         navController.navigate("places/$index")
                     }
                 )
             }
-
             composable(
                 route = MyCityScreen.Places.route,
                 arguments = listOf(navArgument("index") {type = NavType.IntType})
-            )
-             {
+            ) {
                 backStackEntry ->
 
                 PlacesScreen(
@@ -130,7 +122,6 @@ fun MyCityApp(
 
                 )
             }
-
             composable(
                 route = MyCityScreen.Details.route,
                 arguments = listOf(navArgument("index") {type = NavType.IntType})
@@ -144,7 +135,6 @@ fun MyCityApp(
                     index = index,
                     detailsViewModel = detailsViewModel
                 )
-
             }
         }
     }
