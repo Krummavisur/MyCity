@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -35,50 +38,58 @@ fun DetailsScreen(detailsViewModel: DetailsViewModel, index: Int) {
     val place = detailsViewModel.uiState.collectAsState().value
 
     place?.let {
-        Box(modifier = Modifier.fillMaxSize()) {
-            LazyColumn {
-                item {
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(300.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = it.image),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.fillMaxSize()
+                    )
+
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(200.dp)
+                            .fillMaxSize()
                             .background(
                                 Brush.verticalGradient(
-                                    colors = listOf(Color(0xFFE44D26), Color.Black)
+                                    colors = listOf(Color.Transparent, Color.Black),
+                                    startY = 100f
                                 )
                             )
-                    ) {
-                        Image(
-                            painter = painterResource(id = it.image),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(80.dp)
-                                .align(Alignment.CenterEnd)
-                                .padding(end = 16.dp)
-                        )
+                    )
 
-                        Column(
-                            modifier = Modifier
-                                .align(Alignment.BottomStart)
-                                .padding(16.dp)
-                        ) {
-                            Text(
-                                text = stringResource(id = it.name),
-                                fontSize = 28.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = stringResource(id = it.name),
+                        color = Color.White,
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .align(Alignment.BottomStart)
+                            .padding(16.dp)
+                    )
+                }
+            }
 
-                            Text(
-                                text = stringResource(id = it.details),
-                                fontSize = 16.sp,
-                                color = Color.White,
-                                modifier = Modifier.padding(16.dp)
-                            )
-                        }
-                    }
+            item {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = stringResource(id = it.details),
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(16.dp)
+                    )
                 }
             }
         }

@@ -23,7 +23,7 @@ class DetailsViewModel(
     private fun loadPLaceDetails() {
         val place =placesViewModel.uiState.value.placesList.getOrNull(placeIndex)
 
-            _uiState.value = place
+            _uiState.update { place }
     }
 }
 
